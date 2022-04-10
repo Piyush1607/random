@@ -4,6 +4,7 @@ import { fetchCount } from './counterAPI';
 const initialState = {
   user: null,
   status: 'idle',
+  activeComm : false
 };
 
 export const userSlice = createSlice({
@@ -16,6 +17,9 @@ export const userSlice = createSlice({
     logout: (state, action) => {
       state.user = null;
     },
+    toggleActive :(state,action) =>{
+      state.activeComm = !state.activeComm
+    }
   }
 });
 

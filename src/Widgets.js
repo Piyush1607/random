@@ -18,7 +18,7 @@ const Widgets = () => {
   return (
     <div className ="widgets">
         <div className="widgets__header">
-            <h2>LinkedIn News</h2>
+            <h2>New ShidPosts</h2>
             <InfoIcon/>
         </div>
         {newsArticle('Bihari trolled','Lmao dead NGL , NO CAP , FYI , COPE SEETH L W RATIO')}

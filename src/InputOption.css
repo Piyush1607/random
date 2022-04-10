@@ -2,10 +2,15 @@
     display: flex;
     margin-top: 15px;
     padding: 10px;
-    color: gray;
+    color: black;
+    flex-direction: column;
     cursor: pointer;
+    align-items: center;
 }
 
+.inputOption > span{
+    margin-right: 10px;
+}
 
 .inputOption:hover{
     background-color: whitesmoke;
@@ -14,4 +19,8 @@
 
 .inputOption > h4 {
     margin-left: 5px;
+}
+
+.inputOption > label > h4{
+    text-align: center;
 }

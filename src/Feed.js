@@ -14,18 +14,35 @@ import 'firebase/compat/firestore'
 import { useSelector } from 'react-redux'
 import { selectUser } from './features/counter/userSlice'
 import FlipMove from 'react-flip-move'
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
+import { storage } from './firebase'
 
 const Feed = () => {
    
   const user = useSelector(selectUser)  
   const [posts,  setPosts]  = useState([]);
   const [input,setInput] = useState("");
-  const [image,setImage] = useState('');
-  const ref = useRef(null)
-//   console.log(user)
-
+  const [progress , setProgress] = useState(0)
+  const [image,setImage] = useState(null);
+  const [url, setUrl] = useState('')
+  
   let loadFile = function(event) {
-    setImage( URL.createObjectURL(event.target.files[0]));
+    const file = event.target.files[0];  
+    const storageRef = ref(storage,`/files/${file.name}`)
+    const uploadTask = uploadBytesResumable(storageRef,file)
+    uploadTask.on('state_changed',(snapshot)=>{
+        const prog = Math.round((snapshot.bytesTransferred/snapshot.totalBytes)*100)
+        setProgress(prog)
+    },
+    (err)=>{console.log(err)},
+    ()=>{
+        getDownloadURL(uploadTask.snapshot.ref)
+        .then(URL =>{
+            console.log(URL)
+            setUrl(URL)
+        })
+    }
+    )
   }
 
   useEffect(()=>{
@@ -51,7 +68,7 @@ const Feed = () => {
             photoUrl : user.photoURL || '',
             timestamp : firebase.firestore.FieldValue.serverTimestamp(),
             likes : 0,
-            postImg : image,
+            postImg : url,
             dislikes : 0,
             comments : []
       });
@@ -77,7 +94,7 @@ const Feed = () => {
                         <h4>Image</h4>
                     </label>
                     <input id={"files"}  onChange={loadFile} className='media' style={{display : 'none'}} accept= "*" type="file"/>
-                    <button style={{display : "none"}} type= "submit" >Upload Image</button>
+                    <button style={{display : 'none'}} type= "submit" >Upload Image</button>
                 </div>
 
                 <div className="inputOption">
@@ -102,7 +119,7 @@ const Feed = () => {
                 name={post.data.name}
                 description ={post.data.description}
                 message={post.data.message}
-                photoUrl={post.data.photoUrl}
+                photoUrl={post.data.url}
                 numLikes = {post.data.likes }
                 numDisLikes = {post.data.dislikes}
                 postImg = {post.data.postImg}

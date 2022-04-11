@@ -35,10 +35,11 @@
     justify-content: space-evenly;
 }
 
-.stats{
-    margin-top: 10px;
+.stats {
+    margin-top: 15px;
 }
 .stats >span{
+    font-weight: bold;
     margin: 10px;
 }
 
@@ -53,59 +54,57 @@
     align-self: center;
 }
 
-.comments > form{
-    display: flex;
-    justify-content: space-around;
-}
 .uploaded__img{
     margin-top: 20px;
-    width: 30vw;
+    width: 40vw;
     border-radius: 10px;
 }
 
-.comments{
-    margin-left: 10%;
+.commentList{
+    margin-top: 20px;
+    /* border: 1px solid; */
+}
+.comments > form{
+    /* margin-left: 10%; */
+    display: flex;
+    justify-content: space-around;
 }
 
-.comments > button{
-    height: 40px;
+.comments > form > button {
+    height: 50px;
+    width: 80px;
+    border-radius: 10px;
+    border: none;
+    background: rgb(0, 191, 255);
+    color: white;
+    font-weight: bolder;
 }
-
-.cm{
-    list-style: none;
-}
-
 .posted__comment{
     display: flex;
     align-items: center;
-    margin: 10px ;
+    margin: 10px;
+    margin-bottom: 20px;
 }
 
-.comm_info{
-    text-align: center;
-    margin-top: 10px;
-}
-.comm_info > .MuiAvatar-root {
-    margin-bottom: 4px;
-    height: 20px;
-    width: 20px;
-}
+
 
 .posted__comment > p{
     margin-left: 20px;
     margin-top: -10px;
-    font-size: 20px;
 }
 
-.btn__post{
-    background: rgb(9, 169, 227);
-    height: min-content;
-    padding: 10px;
-    border-radius: 10px;
-    border: none;
-    width:80px;
-    color: white;
-    font-size: 20px;
-    font-weight: bolder;
-    /* outline: none; */
+.comm_info > .MuiAvatar-root{
+    height: 25px;
+    width: 25px;
 }
+
+.comm_info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.comm_info > span {
+    font-weight: bolder;
+}
+

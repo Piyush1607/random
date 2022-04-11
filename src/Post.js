@@ -18,7 +18,6 @@ const Post = forwardRef(({ID,name , description , message ,propic, photoUrl,numL
     useEffect(()=>{
       db.collection("posts").onSnapshot(snap=>{
         setList(snap.docs.find(doc => doc.id === ID).data().comments)
-        // console.log(list)
       })
     },[])
 

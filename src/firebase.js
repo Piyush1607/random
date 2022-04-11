@@ -1,7 +1,11 @@
 
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
+import 'firebase/compat/storage'
 import 'firebase/compat/firestore';
+import { getStorage} from "firebase/storage";
+
+// const storageRef = ref(storage);
 const firebaseConfig = {
   apiKey: "AIzaSyD-4HkVhRQCHcoYtNjl5l_5q-MyWMa18w4",
   authDomain: "linkedin-clone-dc320.firebaseapp.com",
@@ -13,8 +17,10 @@ const firebaseConfig = {
 };
 
 
+
 const firebaseApp = firebase.initializeApp(firebaseConfig);
+const storage = getStorage(firebaseApp)
 const db = firebaseApp.firestore();
 const auth = firebase.auth();
 
-export {db , auth};
+export {db , auth ,storage };
